@@ -3,9 +3,10 @@
 import {
   createContext, useContext, useEffect, useState, ReactNode,
 } from 'react'
-import type { User } from '@supabase/supabase-js'
+import type { User, AuthChangeEvent, Session } from '@supabase/supabase-js'
 import { supabaseBrowser } from '@/lib/supabase/browser'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { PROTECTED_ROUTES } from '@/lib/utils/config/routes'
 
 interface Ctx {
   user: User | null
@@ -20,6 +21,7 @@ export function AuthProvider ({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+  const pathname = usePathname()
   const supabase = supabaseBrowser()
 
   /* 1 – initial, VALIDATED load ----------------------------------------- */
@@ -28,7 +30,9 @@ export function AuthProvider ({ children }: { children: ReactNode }) {
       const { data, error } = await supabase.auth.getUser()
       if (error || !data.user) {
         setUser(null)
-        router.push('/signin')
+        if (PROTECTED_ROUTES.some(route => pathname?.startsWith(route))) {
+          router.push('/signin')
+        }
       } else {
         setUser(data.user)
       }
@@ -37,12 +41,12 @@ export function AuthProvider ({ children }: { children: ReactNode }) {
 
     /* 2 – listen for future auth events ---------------------------------- */
     const { data: { subscription } } =
-      supabase.auth.onAuthStateChange((_evt, sess) => {
-        setUser(sess?.user ?? null)
+      supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
+        setUser(session?.user ?? null)
       })
 
     return () => subscription.unsubscribe()
-  }, [router, supabase.auth])
+  }, [router, supabase.auth, pathname])
 
   /* helpers -------------------------------------------------------------- */
   const login = async (email: string, password: string) => {
