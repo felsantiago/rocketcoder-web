@@ -16,13 +16,13 @@ import { Button } from '@/components/ui/button'
 
 export function UserMenu() {
   const router = useRouter()
-  const { user, signOut } = useAuth()
+  const { user, logout } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleLogout = async () => {
     try {
       setIsLoading(true)
-      await signOut()
+      await logout()
     } catch (error) {
       console.error('Erro ao fazer logout:', error)
     } finally {
