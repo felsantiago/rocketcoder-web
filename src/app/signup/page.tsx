@@ -20,7 +20,7 @@ export default function SignupPage() {
               <h1 className="mt-8 mb-2 text-2xl lg:text-3xl text-white">Comece agora</h1>
               <h2 className="text-sm text-gray-400">Crie uma nova conta</h2>
             </div>
-            <SocialAuthButtons showSSO={false} />
+            <SocialAuthButtons />
             {/* Divider */}
             <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
