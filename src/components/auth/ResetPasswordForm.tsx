@@ -6,13 +6,13 @@ import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { getSupabaseClient } from '@/lib/supabase/client'
 import { PasswordChecklist, isPasswordValid } from '../ui/password-checklist'
 import { resetPasswordSchema, type ResetPasswordSchema } from '@/lib/validations/auth'
 import { sanitizeInput } from '@/lib/utils/password-utils'
 import { SecurityLogger, SecurityEventType } from '@/infrastructure/services/security-logger'
 import { toast } from '@/components/ui/toaster'
 import { LoadingSpinner } from '../ui/loading-spinner'
+import { supabaseBrowser } from '@/lib/supabase/browser'
 
 export function ResetPasswordForm() {
   const router = useRouter()
@@ -32,7 +32,7 @@ export function ResetPasswordForm() {
     }
   })
 
-  const supabase = getSupabaseClient()
+  const supabase = supabaseBrowser()
   const securityLogger = SecurityLogger.getInstance()
 
   const onSubmit = async (data: ResetPasswordSchema) => {

@@ -4,13 +4,12 @@ import { useState } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
-import { getSupabaseClient } from '@/lib/supabase/getSupabaseClient'
 import { toast } from '@/components/ui/toaster'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { forgotPasswordSchema, type ForgotPasswordSchema } from '@/lib/validations/auth'
 import { sanitizeEmail } from '@/lib/utils/password-utils'
-import { supabase } from '@/lib/supabase/client'
+import { supabaseBrowser } from '@/lib/supabase/browser'
 
 export function ForgotPasswordForm() {
   const router = useRouter()
@@ -30,7 +29,7 @@ export function ForgotPasswordForm() {
       // Sanitização adicional antes do envio
       const sanitizedEmail = sanitizeEmail(data.email)
 
-      const supabase = getSupabaseClient()
+      const supabase = supabaseBrowser()
       const { error } = await supabase.auth.resetPasswordForEmail(sanitizedEmail, {
         redirectTo: `${window.location.origin}/reset-password`,
       })

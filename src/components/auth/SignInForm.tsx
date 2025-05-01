@@ -4,7 +4,6 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/components/ui/toaster';
 import { LoadingSpinner } from '../ui/loading-spinner';
 import { useForm } from 'react-hook-form';
@@ -12,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema, type AuthSchema } from '@/lib/validations/auth';
 import { sanitizeEmail, sanitizeInput } from '@/lib/utils/password-utils';
 import Link from 'next/link';
+import { supabaseBrowser } from '@/lib/supabase/browser'
 
 export function SignInForm() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export function SignInForm() {
         password: sanitizeInput(data.password)
       };
 
-      const supabase = getSupabaseClient();
+      const supabase = supabaseBrowser();
       const { error } = await supabase.auth.signInWithPassword(sanitizedData);
 
       if (error) {

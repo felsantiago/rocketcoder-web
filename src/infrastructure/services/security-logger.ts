@@ -1,4 +1,4 @@
-import { getSupabaseClient } from '@/lib/supabase/client'
+import { supabaseServer } from "@/lib/supabase/server"
 
 // Tipos de eventos de segurança
 export enum SecurityEventType {
@@ -34,7 +34,7 @@ export class SecurityLogger {
   private supabase
 
   private constructor() {
-    this.supabase = getSupabaseClient()
+    this.supabase = supabaseServer()
   }
 
   public static getInstance(): SecurityLogger {

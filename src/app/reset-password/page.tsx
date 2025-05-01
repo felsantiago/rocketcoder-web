@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { getSupabaseClient } from '@/lib/supabase/client'
 import { ResetPasswordForm } from '@/components/auth/ResetPasswordForm'
 import LogoNavbar from '@/components/auth/LogoNavbar'
 import { Button } from '@/components/ui/button'
+import { supabaseBrowser } from '@/lib/supabase/browser'
 
 export default function ResetPasswordPage() {
   const router = useRouter()
@@ -15,7 +15,7 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const supabase = getSupabaseClient()
+        const supabase = supabaseBrowser()
         const { data: { session }, error } = await supabase.auth.getSession()
 
         if (error) throw error

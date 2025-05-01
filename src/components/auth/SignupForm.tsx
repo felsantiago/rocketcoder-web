@@ -1,11 +1,9 @@
-// src/components/auth/SignupForm.tsx
 'use client'
 
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { getSupabaseClient } from '@/lib/supabase/client';
 import { toast } from '@/components/ui/toaster';
 import { PasswordChecklist, isPasswordValid } from '@/components/ui/password-checklist';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
@@ -13,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, type SignUpSchema } from '@/lib/validations/auth';
 import { sanitizeEmail, sanitizeInput } from '@/lib/utils/password-utils';
+import { supabaseBrowser } from '@/lib/supabase/browser'
 
 export default function SignupForm() {
   const router = useRouter();
@@ -48,7 +47,7 @@ export default function SignupForm() {
         },
       };
 
-      const supabase = getSupabaseClient();
+      const supabase = supabaseBrowser();
       const { error } = await supabase.auth.signUp(sanitizedData);
 
       if (error) throw error;
