@@ -1,0 +1,48 @@
+<svg viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+  <!-- Linha 1 -->
+  <path
+    d="M 150 100 C 300 100, 300 200, 450 200"
+    stroke="url(#strokeGradient)"
+    stroke-width="3"
+    fill="none"
+    stroke-linecap="round"
+  />
+
+  <!-- Linha 2 -->
+  <path
+    d="M 450 200 C 600 200, 600 350, 750 350"
+    stroke="url(#strokeGradient)"
+    stroke-width="3"
+    fill="none"
+    stroke-linecap="round"
+  />
+
+  <!-- Linha 3 -->
+  <path
+    d="M 750 350 C 800 400, 800 500, 850 500"
+    stroke="url(#strokeGradient)"
+    stroke-width="3"
+    fill="none"
+    stroke-linecap="round"
+  />
+
+  <!-- Nós -->
+  <circle cx="150" cy="100" r="8" fill="#E5E7EB" />
+  <circle cx="450" cy="200" r="8" fill="#E5E7EB" />
+  <circle cx="750" cy="350" r="8" fill="#E5E7EB" />
+  <circle cx="850" cy="500" r="8" fill="#E5E7EB" />
+
+  <!-- Títulos -->
+  <text x="120" y="80" fill="#FFFFFF" font-size="14" font-family="sans-serif">Take Screenshot</text>
+  <text x="420" y="180" fill="#FFFFFF" font-size="14" font-family="sans-serif">Capture Code Challenge</text>
+  <text x="720" y="330" fill="#FFFFFF" font-size="14" font-family="sans-serif">Analyze & Solve</text>
+  <text x="820" y="480" fill="#FFFFFF" font-size="14" font-family="sans-serif">Solution Ready</text>
+
+  <!-- Gradiente -->
+  <defs>
+    <linearGradient id="strokeGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#888888" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+</svg>
