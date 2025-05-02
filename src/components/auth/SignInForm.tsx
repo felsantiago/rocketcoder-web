@@ -37,7 +37,7 @@ export function SignInForm() {
       };
 
       const supabase = supabaseBrowser();
-      const { error } = await supabase.auth.signInWithPassword(sanitizedData);
+      const { data: authData, error } = await supabase.auth.signInWithPassword(sanitizedData);
 
       if (error) {
         throw error;
@@ -47,7 +47,18 @@ export function SignInForm() {
 
       // Pequeno delay para mostrar o loading e a mensagem de sucesso
       await new Promise(resolve => setTimeout(resolve, 1500));
-      router.push('/home');
+
+      // Verifica se o login veio do app desktop
+      const params = new URLSearchParams(window.location.search);
+      const isDesktopApp = params.get('source') === 'desktop';
+
+      if (isDesktopApp) {
+        // Redireciona para a página de sucesso
+        router.push('/auth/success');
+      } else {
+        // Redireciona para a home do website
+        router.push('/home');
+      }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       toast.error('Erro ao fazer login. Verifique suas credenciais.');
