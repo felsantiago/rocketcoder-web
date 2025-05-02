@@ -50,6 +50,14 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+
+    --tw-bg-opacity: 1;
+    --brand-500: 154.9deg 100% 19.2%;
+  }
+
+  .border-brand-500\/75 {
+    background-color: hsl(var(--brand-500) / var(--tw-bg-opacity));
+    border-color: hsl(var(--brand-500) / .75);
   }
 }
 

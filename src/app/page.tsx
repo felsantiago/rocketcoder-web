@@ -1,6 +1,5 @@
 import { Footer } from '@/components/landing/Footer'
 import { Hero } from '@/components/landing/Hero'
-import { HowItWorks } from '@/components/landing/HowItWorks'
 import { Pricing } from '@/components/landing/Pricing'
 import { Features } from '@/components/landing/Features'
 import { Header } from '@/components/landing/Header'

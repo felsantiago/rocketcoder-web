@@ -193,7 +193,7 @@ export function ResetPasswordForm() {
       <Button
         type="submit"
         disabled={loading || !isFormValid}
-        className={`h-[42px] w-full bg-brand hover:bg-brand-dark text-gray-900 relative ${
+        className={`relative cursor-pointer space-x-2 text-center font-regular ease-out duration-200 rounded-md outline-none transition-all outline-0 focus-visible:outline-4 focus-visible:outline-offset-1 border bg-brand-400 dark:bg-brand-500 hover:bg-brand/80 dark:hover:bg-brand/50 text-foreground border-brand-500/75 dark:border-brand/30 hover:border-brand-600 dark:hover:border-brand focus-visible:outline-brand-600 data-[state=open]:bg-brand-400/80 dark:data-[state=open]:bg-brand-500/80 data-[state=open]:outline-brand-600 w-full flex items-center justify-center text-base px-4 py-2 h-[42px] ${
           loading ? 'cursor-not-allowed' : ''
         }`}
       >
